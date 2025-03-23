@@ -1,0 +1,11 @@
+# Build file & node_modules
+.next
+node_modules
+
+# Docker files
+Dockerfile
+docker-compose.yml
+
+# Git files
+.git
+.gitignore

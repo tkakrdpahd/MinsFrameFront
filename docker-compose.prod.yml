@@ -1,0 +1,19 @@
+# docker-compose.prod.yml
+version: '3.8'
+
+services:
+  app:
+    platform: linux/arm64
+    container_name: artbooth-front
+    image: artbooth-front-prod:artbooth-prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MODE: production
+    ports:
+      - "3000:3000"
+    environment:
+      - MODE=production
+    env_file:
+      - .env
