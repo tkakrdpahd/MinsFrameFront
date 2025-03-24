@@ -4,8 +4,8 @@ version: '3.8'
 services:
   app:
     platform: linux/arm64
-    container_name: artbooth-front
-    image: artbooth-front-prod:artbooth-prod
+    container_name: myapp-front
+    image: myapp-front-prod:myapp-prod
     build:
       context: .
       dockerfile: Dockerfile
