@@ -1,5 +1,15 @@
+/* Tailwindscss 4.0 */
 @import "tailwindcss";
-@import "react-toastify/dist/ReactToastify.css";
+
+/* @radix-ui/colors */
+@import "@radix-ui/colors/gray.css";
+@import "@radix-ui/colors/blue.css";
+@import "@radix-ui/colors/green.css";
+@import "@radix-ui/colors/red.css";
+@import "@radix-ui/colors/gray-dark.css";
+@import "@radix-ui/colors/blue-dark.css";
+@import "@radix-ui/colors/green-dark.css";
+@import "@radix-ui/colors/red-dark.css";
 
 /* Chrome, Safari, Opera용 스크롤바 숨김 */
 ::-webkit-scrollbar {
@@ -14,13 +24,13 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #111111;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #111111;
+    --foreground: #ffffff;
   }
 }
 

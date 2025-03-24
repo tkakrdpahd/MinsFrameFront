@@ -34,7 +34,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
   console.log('RootLayout - currentLng:', currentLng, 'dir:', dir(currentLng));
 
   return (
-    <html lang={currentLng} dir={dir(currentLng)}>
+    <html lang={currentLng} dir={dir(currentLng)} suppressHydrationWarning>
       <head />
       <body className={`${notoSansJP.variable} ${notoSansKR.variable} antialiased`}>
         <Preload>{children}</Preload>
