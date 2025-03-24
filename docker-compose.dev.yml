@@ -5,7 +5,7 @@ services:
   app:
     platform: linux/arm64
     container_name: myapp-front
-    image: myapp-front-dev:artbooth-dev
+    image: myapp-front-dev:myapp-dev
     build:
       context: .
       dockerfile: Dockerfile
