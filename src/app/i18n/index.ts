@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Namespace, FlatNamespace, KeyPrefix } from 'i18next'
 import { FallbackNs } from 'react-i18next'
 import i18next from  './i18next'
