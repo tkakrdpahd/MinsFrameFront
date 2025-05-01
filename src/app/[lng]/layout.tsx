@@ -3,6 +3,7 @@ import { Noto_Sans_JP, Noto_Sans_KR } from 'next/font/google';
 import { dir } from 'i18next'
 import { languages } from '../i18n/settings'
 import { getT } from '../i18n'
+import Preload from './preload';
 import './global.css'
 
 const notoSansJP = Noto_Sans_JP({
@@ -36,11 +37,11 @@ export default async function RootLayout({
 }) {
   const { lng } = await params
   return (
-    <html lang={lng} dir={dir(lng)}>
+    <html lang={lng} dir={dir(lng)} suppressHydrationWarning>
       <head />
       <body className={`${notoSansJP.variable} ${notoSansKR.variable} antialiased`}>
         <main>
-          {children}
+          <Preload>{children}</Preload>
         </main>
       </body>
     </html>
