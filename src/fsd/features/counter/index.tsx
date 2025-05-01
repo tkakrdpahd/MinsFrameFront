@@ -1,5 +1,5 @@
 "use client";
-import { Flex, Button, Heading } from "@radix-ui/themes";
+import { Flex, Button, Heading, Text } from "@radix-ui/themes";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/fsd/app/store";
 import { down, init, up } from "@/fsd/app/slices/counterSlice";
@@ -21,7 +21,8 @@ export default function Counter() {
 
   return (
     <Flex direction="column" align="center" p="4" gap="2">
-      <Heading>{count}</Heading>
+      <Heading>Redux-Toolkit Tester</Heading>
+      <Text size="3" weight="regular">{count}</Text>
       <Flex gap="2">
         <Button onClick={addNumber}>+</Button>
         <Button onClick={minusNumber}>-</Button>
