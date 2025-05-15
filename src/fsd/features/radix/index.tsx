@@ -1,5 +1,5 @@
 import { Form } from 'radix-ui'
-import { TextField, Heading, Text, Button } from '@radix-ui/themes'
+import { TextField, Heading, Text } from '@radix-ui/themes'
 
 export default function Radix() {
   return (
