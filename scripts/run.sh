@@ -1,9 +1,20 @@
-# run.sh
-# pnpm 빌드 테스트
+#!/bin/bash
+set -e
+set -x
+
+echo "Running Playwright tests..."
+pnpm exec playwright test
+
+echo "Running production build..."
 pnpm run build
-# docker 시스템 초기화 (캐시 충돌 방지) - 자동으로 y 입력
+
+echo "Cleaning Docker system all images, containers..."
 docker system prune -a -f
-# docker 빌드
+
+echo "Building Docker images no cache..."
 docker-compose -f docker-compose.dev.yml build --no-cache
-# docker 실행
+
+echo "Starting Docker containers dev..."
 docker-compose -f docker-compose.dev.yml -p mins-frame-dev up -d
+
+echo "All done!"
