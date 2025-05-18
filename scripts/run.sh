@@ -38,7 +38,7 @@ echo "Building Docker images (no cache)..."
 docker-compose -f "$COMPOSE_FILE" build --no-cache
 
 echo "Starting Docker containers..."
-docker-compose -f "$COMPOSE_FILE" -p "$PROJECT_NAME-$MODE" up -d
+docker-compose -f "$COMPOSE_FILE" up -d
 
 echo "Access Test: http://localhost:$PORT_NUMBER"
 

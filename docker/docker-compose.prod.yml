@@ -1,8 +1,9 @@
 # docker-compose.prod.yml
+name: ${PROJECT_NAME}-${MODE}
 services:
   app:
     platform: linux/arm64
-    container_name: ${PROJECT_NAME}
+    container_name: ${SERVICE_NAME}
     image: ${PROJECT_NAME}:${SERVICE_NAME}
     build:
       context: ..
