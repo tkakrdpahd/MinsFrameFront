@@ -26,7 +26,7 @@ RUN . $NVM_DIR/nvm.sh && npm install -g pnpm && npm install heroui-cli -g
 WORKDIR /app
 
 # .env 파일 복사 (필요한 경우)
-COPY .env .env
+# COPY .env .env
 
 # ----- Build Stage -----
 FROM base AS build
