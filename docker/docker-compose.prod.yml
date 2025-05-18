@@ -2,16 +2,16 @@
 services:
   app:
     platform: linux/arm64
-    container_name: mins-frame-prod
-    image: mins-frame-prod:mins-frame-prod
+    container_name: ${SERVICE_NAME}
+    image: ${PROJECT_NAME}:${SERVICE_NAME}
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
       args:
         MODE: production
     ports:
-      - "3000:3000"
+      - "${PORT_NUMBER}:3000"
     environment:
       - MODE=production
     env_file:
-      - .env
+      - ../.env

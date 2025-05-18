@@ -2,16 +2,16 @@
 services:
   app:
     platform: linux/arm64
-    container_name: mins-frame-dev
-    image: mins-frame-dev:mins-frame-dev
+    container_name: ${SERVICE_NAME}
+    image: ${PROJECT_NAME}:${SERVICE_NAME}
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
       args:
         MODE: development
     ports:
-      - "3000:3000"
+      - "${PORT_NUMBER}:3000"
     environment:
       MODE: development
     volumes:
-      - ./src:/app/src:cached
+      - ../src:/app/src:cached

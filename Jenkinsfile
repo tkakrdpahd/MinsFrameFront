@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Build Docker Images') {
             steps {
-                echo "Building Docker Images using docker-compose.dev.yml..."
+                echo "Building Docker Images using docker-compose.prod.yml..."
                 sh 'docker compose -f docker-compose.prod.yml build --no-cache'
             }
         }
