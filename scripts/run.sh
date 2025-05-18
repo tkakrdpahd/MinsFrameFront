@@ -9,6 +9,9 @@ cd "$ROOT_DIR"
 # .env 로드
 export $(grep -v '^#' "$ROOT_DIR/.env" | xargs)
 
+echo "Running Jest tests..."
+pnpm exec jest
+
 echo "Running Playwright tests..."
 pnpm exec playwright test
 
