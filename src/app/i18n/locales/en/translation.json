@@ -1,5 +1,13 @@
 {
     "title":"Mins Frame - EN",
     "content":"Mins Frame",
+    "header":{
+        "title":"MinsFrame",
+        "nav":{
+            "home":"Home",
+            "about":"About",
+            "contact":"Contact"
+        }
+    },
     "footer":"ⓒ 2025 Minseok Doo ALL RIGHTS RESERVED."
 }
