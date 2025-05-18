@@ -1,9 +1,12 @@
-import { Heading } from "@radix-ui/themes";
+import { Text } from "@radix-ui/themes";
+import { getT } from "@/app/i18n";
 
-export default function Footer() {
+export default async function Footer() {
+  const { t } = await getT();
+
   return (
-    <footer>
-      <Heading size="3">Footer</Heading>
+    <footer className="w-full flex justify-center p-4">
+      <Text size="1">{t('footer')}</Text>
     </footer>
   );
 }

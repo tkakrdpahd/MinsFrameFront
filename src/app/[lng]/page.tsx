@@ -7,6 +7,7 @@ import Ej2 from '@/fsd/features/ej2'
 import Radix from '@/fsd/features/radix'
 import SMPTE from '@/fsd/shared/smpte'
 import Counter from '@/fsd/features/counter'
+import Ky from '@/fsd/features/ky'
 
 export default async function Page() {
   const { t } = await getT()
@@ -14,8 +15,9 @@ export default async function Page() {
   return (
     <Flex width="100%" height="100%" direction="column">
       <Heading size="6" weight="bold" align="center">{t('title')}</Heading>
-      <Flex width="100%" height="100%" direction="row" align="center" justify="center" gap="9">
+      <Flex width="100%" height="100%" direction="row" align="center" justify="center" gap="9" mt="4">
         <Flex direction="column" gap="2">
+          <Ky />
           <Radix />
           <Counter />
         </Flex>
