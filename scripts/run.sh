@@ -9,6 +9,7 @@ cd "$ROOT_DIR"
 # .env 로드
 export $(grep -v '^#' "$ROOT_DIR/.env" | xargs)
 
+# 테스트 실행
 echo "Running Jest tests..."
 pnpm exec jest
 
@@ -18,14 +19,12 @@ pnpm exec playwright test
 echo "Playwright Test completed. Cleaning up test artifacts..."
 rm -rf playwright-report test-results
 
+# 프로덕션 빌드
 echo "Running production build..."
 pnpm run build
 
 echo "Build completed. Cleaning up build artifacts..."
 rm -rf .next
-
-echo "Cleaning Docker system all images, containers..."
-docker system prune -a -f
 
 # Compose 파일 경로 확인
 COMPOSE_FILE="$ROOT_DIR/docker/docker-compose.$MODE.yml"
@@ -34,8 +33,8 @@ if [ ! -f "$COMPOSE_FILE" ]; then
   exit 1
 fi
 
-echo "Building Docker images (no cache)..."
-docker-compose -f "$COMPOSE_FILE" build --no-cache
+echo "Building Docker images..."
+docker-compose -f "$COMPOSE_FILE" build
 
 echo "Starting Docker containers..."
 docker-compose -f "$COMPOSE_FILE" up -d
