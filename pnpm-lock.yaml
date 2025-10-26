@@ -14,12 +14,6 @@ importers:
       '@reduxjs/toolkit':
         specifier: ^2.9.2
         version: 2.9.2(react-redux@9.2.0(@types/react@19.2.2)(react@19.2.0)(redux@5.0.1))(react@19.2.0)
-      '@syncfusion/ej2-base':
-        specifier: ^30.2.6
-        version: 30.2.6
-      '@syncfusion/ej2-react-calendars':
-        specifier: ^30.2.4
-        version: 30.2.4
       '@tailwindcss/postcss':
         specifier: ^4.1.16
         version: 4.1.16
@@ -1437,40 +1431,6 @@ packages:
 
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
-
-  '@syncfusion/ej2-base@30.2.6':
-    resolution: {integrity: sha512-RC7yA4nK/1CvkQQkUnYbvsFUFcuWkbSxhyVgn4ymNCAylRARFerdO6epTJAn204+vhmzoS34q+4EdeWwtg0/PA==}
-    hasBin: true
-
-  '@syncfusion/ej2-buttons@30.2.4':
-    resolution: {integrity: sha512-NbZD8aI3AgVM0JEEB+CGh8e46ClxqCGrZ0AkRVifLX8Z7NmuZ9PV7d8JQDyPWWQmKIu3V4nc6ChmiYtBEkcC3w==}
-
-  '@syncfusion/ej2-calendars@30.2.4':
-    resolution: {integrity: sha512-/CWUBcsZ4FLcQtWGxKsc3xKKfqDloG9/JFc38zqErp2bdhTaQj1N4OmYNWAjnQ146v/z17K2KH2xiXW6bJpQ8g==}
-
-  '@syncfusion/ej2-data@30.2.4':
-    resolution: {integrity: sha512-HYBwk6U0pxTjc8yEYAj2YyuqRsgbVIAzTgYn1/WEvysXHFhwsNA5oUlvF9BFGPBiWLSJCCv4R9jDQHGm9pbtqw==}
-
-  '@syncfusion/ej2-icons@30.2.4':
-    resolution: {integrity: sha512-zKJaCs9AhPT/xOVvjlSAQCCcQX9P+P/ajVd2Xe2UxeSuJpB8K9D1+4MHXe6lZOdY/hOyNWocpZc60UmcaAcR/Q==}
-
-  '@syncfusion/ej2-inputs@30.2.6':
-    resolution: {integrity: sha512-A6orvv+qdybR9hPHRb+XlVOOT6tB8BodxD4I/aVEGj0Vs2iAAbkJgQ+Lccn//X0r/OLoxxoVLQBRv8k8bRuBPg==}
-
-  '@syncfusion/ej2-lists@30.2.4':
-    resolution: {integrity: sha512-2+/tDgrR+GtuCB8u1IFKEbmduKZUHHRrudZXpWQWgFlO3KDZozDHwTwgf6xwlfr1u03L63H4AksaanfcBL4Zpw==}
-
-  '@syncfusion/ej2-popups@30.2.4':
-    resolution: {integrity: sha512-nlfLVgmMNK6xk/c6UN7OuLgsnMqX8cn+Ql84PVovI2cgc1MCT4Jh46MRbArXtJfeCtWIyHMVE4+hfbNAXYDhWQ==}
-
-  '@syncfusion/ej2-react-base@30.2.4':
-    resolution: {integrity: sha512-gctBd8lIUi0G1VhRzSguQEUA3iwaaXlhBCIhlAM4sIUJ3KA7mAiaGXc8nqWVsYNFr2KgSXKdFPvAPWFdWIyR6A==}
-
-  '@syncfusion/ej2-react-calendars@30.2.4':
-    resolution: {integrity: sha512-26j7WBGoNlL/hmVV+hWIzi4wNsMc/MvR+M4sbs4mQwragnQEWi79j4C5o43kyXT2a/mUfVkDfLIxOxbk7q/38A==}
-
-  '@syncfusion/ej2-splitbuttons@30.2.4':
-    resolution: {integrity: sha512-9p0wMvNgZtcHJbwGh/RxLpEtu4AioqooO2d/aW72FufeSniR3/31fwSKBOzOu4EvR7EaYGXAnVxrmHTEojzlRg==}
 
   '@tailwindcss/node@4.1.16':
     resolution: {integrity: sha512-BX5iaSsloNuvKNHRN3k2RcCuTEgASTo77mofW0vmeHkfrDWaoFAFvNHpEgtu0eqyypcyiBkDWzSMxJhp3AUVcw==}
@@ -5357,62 +5317,6 @@ snapshots:
   '@swc/helpers@0.5.15':
     dependencies:
       tslib: 2.8.1
-
-  '@syncfusion/ej2-base@30.2.6':
-    dependencies:
-      '@syncfusion/ej2-icons': 30.2.4
-
-  '@syncfusion/ej2-buttons@30.2.4':
-    dependencies:
-      '@syncfusion/ej2-base': 30.2.6
-
-  '@syncfusion/ej2-calendars@30.2.4':
-    dependencies:
-      '@syncfusion/ej2-base': 30.2.6
-      '@syncfusion/ej2-buttons': 30.2.4
-      '@syncfusion/ej2-inputs': 30.2.6
-      '@syncfusion/ej2-lists': 30.2.4
-      '@syncfusion/ej2-popups': 30.2.4
-
-  '@syncfusion/ej2-data@30.2.4':
-    dependencies:
-      '@syncfusion/ej2-base': 30.2.6
-
-  '@syncfusion/ej2-icons@30.2.4': {}
-
-  '@syncfusion/ej2-inputs@30.2.6':
-    dependencies:
-      '@syncfusion/ej2-base': 30.2.6
-      '@syncfusion/ej2-buttons': 30.2.4
-      '@syncfusion/ej2-popups': 30.2.4
-      '@syncfusion/ej2-splitbuttons': 30.2.4
-
-  '@syncfusion/ej2-lists@30.2.4':
-    dependencies:
-      '@syncfusion/ej2-base': 30.2.6
-      '@syncfusion/ej2-buttons': 30.2.4
-      '@syncfusion/ej2-data': 30.2.4
-      '@syncfusion/ej2-popups': 30.2.4
-
-  '@syncfusion/ej2-popups@30.2.4':
-    dependencies:
-      '@syncfusion/ej2-base': 30.2.6
-      '@syncfusion/ej2-buttons': 30.2.4
-
-  '@syncfusion/ej2-react-base@30.2.4':
-    dependencies:
-      '@syncfusion/ej2-base': 30.2.6
-
-  '@syncfusion/ej2-react-calendars@30.2.4':
-    dependencies:
-      '@syncfusion/ej2-base': 30.2.6
-      '@syncfusion/ej2-calendars': 30.2.4
-      '@syncfusion/ej2-react-base': 30.2.4
-
-  '@syncfusion/ej2-splitbuttons@30.2.4':
-    dependencies:
-      '@syncfusion/ej2-base': 30.2.6
-      '@syncfusion/ej2-popups': 30.2.4
 
   '@tailwindcss/node@4.1.16':
     dependencies:

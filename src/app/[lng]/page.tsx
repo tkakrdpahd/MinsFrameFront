@@ -3,7 +3,6 @@
 import { getT } from '@/app/i18n'
 // import { Trans } from 'react-i18next/TransWithoutContext'
 import { Flex, Heading } from '@radix-ui/themes'
-import Ej2 from '@/fsd/features/ej2'
 import Radix from '@/fsd/features/radix'
 import SMPTE from '@/fsd/shared/smpte'
 import Counter from '@/fsd/features/counter'
@@ -20,9 +19,6 @@ export default async function Page() {
           <Ky />
           <Radix />
           <Counter />
-        </Flex>
-        <Flex direction="column" gap="2">
-          <Ej2 />
         </Flex>
         <SMPTE />
       </Flex>
