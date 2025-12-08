@@ -1,11 +1,4 @@
-# Build file & node_modules
-.next
+.react-router
+build
 node_modules
-
-# Docker files
-Dockerfile
-docker-compose.yml
-
-# Git files
-.git
-.gitignore
+README.md
