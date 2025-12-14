@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mins_frame_front:latest
+    container_name: mins_frame_front
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    restart: unless-stopped
+    networks:
+          - app-network
+
+networks:
+  app-network:
+    name: mins_frame_front_network
