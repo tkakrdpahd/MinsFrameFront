@@ -19,22 +19,22 @@ export default function handleRequest(
 ) {
   return new Promise((resolve, reject) => {
     let shellRendered = false;
-    let userAgent = request.headers.get("user-agent");
+    const userAgent = request.headers.get("user-agent");
 
-    let readyOption: keyof RenderToPipeableStreamOptions =
+    const readyOption: keyof RenderToPipeableStreamOptions =
       (userAgent && isbot(userAgent)) || entryContext.isSpaMode
         ? "onAllReady"
         : "onShellReady";
 
-    let { pipe, abort } = renderToPipeableStream(
+    const { pipe, abort } = renderToPipeableStream(
       <I18nextProvider i18n={getInstance(routerContext)}>
         <ServerRouter context={entryContext} url={request.url} />
       </I18nextProvider>,
       {
         [readyOption]() {
           shellRendered = true;
-          let body = new PassThrough();
-          let stream = createReadableStreamFromReadable(body);
+          const body = new PassThrough();
+          const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set("Content-Type", "text/html");
 

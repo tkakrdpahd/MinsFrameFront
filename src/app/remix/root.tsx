@@ -22,7 +22,7 @@ import {
 export const middleware = [i18nextMiddleware];
 
 export async function loader({ context }: Route.LoaderArgs) {
-  let locale = getLocale(context as unknown as RouterContextProvider);
+  const locale = getLocale(context as unknown as RouterContextProvider);
   return data(
     { locale },
     { headers: { "Set-Cookie": await localeCookie.serialize(locale) } },
@@ -43,7 +43,7 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  let { i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   return (
     <html lang={i18n.language} dir={i18n.dir(i18n.language)}>
@@ -63,7 +63,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App({ loaderData: { locale } }: Route.ComponentProps) {
-  let { i18n } = useTranslation();
+  const { i18n } = useTranslation();
   useEffect(() => {
     if (i18n.language !== locale) i18n.changeLanguage(locale);
   }, [locale, i18n]);
