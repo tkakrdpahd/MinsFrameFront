@@ -1,16 +1,10 @@
-import {
-  data,
-  Links,
-  Meta,
-  Outlet,
-  RouterContextProvider,
-  Scripts,
-  ScrollRestoration,
-} from "react-router";
 import { useEffect } from "react";
+import { data, Links, Meta, Outlet, RouterContextProvider, Scripts, ScrollRestoration } from "react-router";
 import type { Route } from "./+types/root";
 
 import "./app.css";
+
+import QueryProvider from "~/app/query/provider";
 
 import { useTranslation } from "react-i18next";
 import {
@@ -67,5 +61,10 @@ export default function App({ loaderData: { locale } }: Route.ComponentProps) {
   useEffect(() => {
     if (i18n.language !== locale) i18n.changeLanguage(locale);
   }, [locale, i18n]);
-  return <Outlet />;
+  
+  return (
+    <QueryProvider>
+      <Outlet />
+    </QueryProvider>
+  );
 }
