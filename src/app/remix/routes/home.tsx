@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import type { Route } from "./+types/home";
-import { Welcome } from "~/pages/welcome/welcome";
+import { MainPage } from "~/pages/main/main";
 
 export function meta(_args: Route.MetaArgs) {
   return [
@@ -11,5 +11,5 @@ export function meta(_args: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Welcome />;
+  return <MainPage />;
 }
