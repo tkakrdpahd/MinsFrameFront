@@ -17,7 +17,7 @@ export function MainPage() {
   const resolvedLanguage = i18n.resolvedLanguage;
 
     return (
-        <div className="flex flex-col min-h-screen px-4 py-4 relative">
+        <div className="flex flex-col min-h-screen relative">
             <Header />
             <div className="fixed inset-0 z-0 pointer-events-none">
                 <Clock />

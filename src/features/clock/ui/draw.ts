@@ -32,12 +32,13 @@ export function draw(p: p5, container: HTMLDivElement | null) {
         p.fill(0, 0, 0, 128);
     }
     
-    p.circle(container.offsetWidth / 2, container.offsetHeight / 2, 255);
+    p.circle(container.offsetWidth / 2, container.offsetHeight / 2, 512);
     
     if (darkMode) {
         p.fill(250, 250, 51, 128);
     } else {
         p.fill(255, 244, 79, 128);
     }
+
     p.circle(p.mouseX, p.mouseY, 50);
 }
