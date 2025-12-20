@@ -5,9 +5,10 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-/* * { 
-  cursor: none; 
-} */
+* { 
+  cursor: none;
+  overflow: hidden;
+}
 
 html,
 body {

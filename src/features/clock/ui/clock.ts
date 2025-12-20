@@ -25,6 +25,11 @@ export function clock(p: p5, container: HTMLDivElement | null) {
     const centerY = container.offsetHeight / 2;
     const radius = 256;
     
+    const hours = new Date().getHours() % 12;
+    const minutes = new Date().getMinutes();
+    const seconds = new Date().getSeconds();
+    const milliseconds = new Date().getMilliseconds();
+    
     p.noStroke();
     
     if (darkMode) {
@@ -41,13 +46,41 @@ export function clock(p: p5, container: HTMLDivElement | null) {
     }
     p.endShape(p.CLOSE);
     
-    const handLength = 200;
-    const handAngle = -p.PI / 2;
+    const hourAngle = p.map(hours + minutes / 60, 0, 12, 0, p.TWO_PI) - p.PI / 2;
+    const minuteAngle = p.map(minutes + seconds / 60, 0, 60, 0, p.TWO_PI) - p.PI / 2;
+    const totalSeconds = seconds + milliseconds / 1000;
+    const secondAngle = p.map(totalSeconds, 0, 60, 0, p.TWO_PI) - p.PI / 2;
     
-    const handEndX = centerX + handLength * p.cos(handAngle);
-    const handEndY = centerY + handLength * p.sin(handAngle);
+    const hourHandLength = 120;
+    const minuteHandLength = 160;
+    const secondHandLength = 180;
     
-    p.stroke(255, 255, 255, 128);
-    p.strokeWeight(1);
-    p.line(centerX, centerY, handEndX, handEndY);
+    const hourEndX = centerX + hourHandLength * p.cos(hourAngle);
+    const hourEndY = centerY + hourHandLength * p.sin(hourAngle);
+    
+    p.stroke(255, 255, 255, 200);
+    p.strokeWeight(4);
+    p.line(centerX, centerY, hourEndX, hourEndY);
+    
+    const minuteEndX = centerX + minuteHandLength * p.cos(minuteAngle);
+    const minuteEndY = centerY + minuteHandLength * p.sin(minuteAngle);
+    
+    p.stroke(255, 255, 255, 200);
+    p.strokeWeight(3);
+    p.line(centerX, centerY, minuteEndX, minuteEndY);
+    
+    const secondEndX = centerX + secondHandLength * p.cos(secondAngle);
+    const secondEndY = centerY + secondHandLength * p.sin(secondAngle);
+    
+    p.stroke(255, 0, 0, 255);
+    p.strokeWeight(2);
+    p.line(centerX, centerY, secondEndX, secondEndY);
+    
+    p.noStroke();
+    if (darkMode) {
+        p.fill(255, 255, 255, 255);
+    } else {
+        p.fill(0, 0, 0, 255);
+    }
+    p.circle(centerX, centerY, 8);
 }
