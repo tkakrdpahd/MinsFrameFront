@@ -10,15 +10,19 @@ import { useTranslation } from "react-i18next";
 
 import { Header } from "~/widgets/header/header";
 import { Footer } from "~/widgets/footer/footer";
+import { Clock } from "~/features/clock/clock";
 
 export function MainPage() {
   const { t, i18n } = useTranslation("translation");
   const resolvedLanguage = i18n.resolvedLanguage;
 
     return (
-        <div className="flex flex-col min-h-screen px-4 py-4">
+        <div className="flex flex-col min-h-screen px-4 py-4 relative">
             <Header />
-            <main className="flex flex-1 items-center justify-center pt-16 pb-4">
+            <div className="fixed inset-0 z-0 pointer-events-none">
+                <Clock />
+            </div>
+            <main className="flex flex-col flex-1 items-center justify-center pt-16 pb-4 gap-4 relative z-10">
                 <div className="flex flex-col items-center gap-4 min-h-0">
                     <p>{t("title")}</p>
                     <p>{t("description")}</p>
