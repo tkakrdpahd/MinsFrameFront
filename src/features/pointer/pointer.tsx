@@ -4,7 +4,7 @@
 
 import type p5 from "p5";
 import { useEffect, useState, useRef } from "react";
-import { setup, pointer } from "./ui";
+import { setup, pointer, particle } from "./ui";
 
 export function Pointer() {
     const [p5Loaded, setP5Loaded] = useState(false);
@@ -22,6 +22,9 @@ export function Pointer() {
                     setup(p, containerRef.current);
                 };
                 p.draw = () => {
+                    p.clear();
+
+                    particle(p, containerRef.current);
                     pointer(p, containerRef.current);
                 };
             }, containerRef.current as HTMLElement);

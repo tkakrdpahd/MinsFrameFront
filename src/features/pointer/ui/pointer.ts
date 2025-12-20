@@ -5,21 +5,10 @@
 import type p5 from "p5";
 import { isDarkMode } from "~/shared/mode/mode";
 
-export function setup(p: p5, container: HTMLDivElement | null) {
-    if (container) {
-        p.createCanvas(container.offsetWidth, container.offsetHeight);
-    } else {
-        p.createCanvas(window.innerWidth, window.innerHeight);
-    }
-    p.background(0, 0, 0, 0);
-}
-
 export function pointer(p: p5, container: HTMLDivElement | null) {
     if (!container) return;
 
     const darkMode = isDarkMode();
-
-    p.clear();
 
     p.noStroke();
 
@@ -29,5 +18,5 @@ export function pointer(p: p5, container: HTMLDivElement | null) {
         p.fill(255, 244, 79, 128);
     }
 
-    p.circle(p.mouseX, p.mouseY, 50);
+    p.circle(p.mouseX, p.mouseY, 10);
 }
