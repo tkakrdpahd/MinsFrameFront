@@ -30,7 +30,7 @@ export function clock(p: p5, container: HTMLDivElement | null) {
     if (darkMode) {
         p.fill(255, 255, 255, 128);
     } else {
-        p.fill(0, 0, 0, 128);
+        p.fill(0, 0, 0, 32);
     }
     
     p.beginShape();
