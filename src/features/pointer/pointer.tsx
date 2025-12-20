@@ -1,11 +1,12 @@
 /**
- * Clock component
+ * Pointer component
  */
+
 import type p5 from "p5";
 import { useEffect, useState, useRef } from "react";
-import { setup, clock } from "./ui";
+import { setup, pointer } from "./ui";
 
-export function Clock() {
+export function Pointer() {
     const [p5Loaded, setP5Loaded] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const sketchRef = useRef<p5>(null);
@@ -21,12 +22,12 @@ export function Clock() {
                     setup(p, containerRef.current);
                 };
                 p.draw = () => {
-                    clock(p, containerRef.current);
+                    pointer(p, containerRef.current);
                 };
             }, containerRef.current as HTMLElement);
-            
+
             setP5Loaded(true);
-            
+
             sketchRef.current = sketch;
 
             return () => {
