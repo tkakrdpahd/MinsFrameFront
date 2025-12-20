@@ -3,7 +3,7 @@
  */
 import type p5 from "p5";
 import { useEffect, useState, useRef } from "react";
-import { setup, draw } from "./ui/draw";
+import { setup, draw } from "./ui";
 
 export function Clock() {
     const [p5Loaded, setP5Loaded] = useState(false);
@@ -39,7 +39,7 @@ export function Clock() {
 
     return (
         <div ref={containerRef} className="w-full h-full">
-            {!p5Loaded && <div>Loading...</div>}
+            {!p5Loaded && <></>}
         </div>
     );
 }

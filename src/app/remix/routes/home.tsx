@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import type { Route } from "./+types/home";
 import { MainPage } from "~/pages/main/main";
 
