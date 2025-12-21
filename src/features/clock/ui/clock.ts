@@ -4,6 +4,45 @@
 
 import type p5 from "p5";
 import { isDarkMode } from "~/shared/mode/mode";
+import {
+    LAYER_COUNT,
+    BASE_RADIUS,
+    LAYER_RADIUS_SPACING,
+    BASE_FREQ1,
+    FREQ1_INCREMENT,
+    BASE_FREQ2,
+    FREQ2_INCREMENT,
+    BASE_FREQ3,
+    FREQ3_INCREMENT,
+    TIME_SPEED1,
+    TIME_SPEED2,
+    TIME_SPEED3,
+    BASE_AMPLITUDE1,
+    AMPLITUDE1_INCREMENT,
+    BASE_AMPLITUDE2,
+    AMPLITUDE2_INCREMENT,
+    BASE_AMPLITUDE3,
+    AMPLITUDE3_INCREMENT,
+    HOUR_HAND_LENGTH,
+    MINUTE_HAND_LENGTH,
+    SECOND_HAND_LENGTH,
+    HOUR_HAND_WEIGHT,
+    MINUTE_HAND_WEIGHT,
+    SECOND_HAND_WEIGHT,
+    DARK_MODE_STROKE_COLOR,
+    DARK_MODE_FILL_COLOR,
+    LIGHT_MODE_STROKE_COLOR,
+    LIGHT_MODE_FILL_COLOR,
+    HAND_COLOR,
+    SECOND_HAND_COLOR,
+    CENTER_DOT_COLOR_DARK,
+    CENTER_DOT_COLOR_LIGHT,
+    ANGLE_RESOLUTION,
+    CENTER_DOT_SIZE,
+    HOURS_IN_CLOCK,
+    MINUTES_IN_HOUR,
+    SECONDS_IN_MINUTE,
+} from "../model";
 
 export function setup(p: p5, container: HTMLDivElement | null) {
     if (container) {
@@ -34,32 +73,31 @@ export function clock(p: p5, container: HTMLDivElement | null) {
     p.noStroke();
     
     if (darkMode) {
-        p.stroke(242, 231, 80, 255);
-        p.fill(242, 231, 80, 32);
+        p.stroke(DARK_MODE_STROKE_COLOR.r, DARK_MODE_STROKE_COLOR.g, DARK_MODE_STROKE_COLOR.b, DARK_MODE_STROKE_COLOR.a);
+        p.fill(DARK_MODE_FILL_COLOR.r, DARK_MODE_FILL_COLOR.g, DARK_MODE_FILL_COLOR.b, DARK_MODE_FILL_COLOR.a);
     } else {
-        p.stroke(0, 0, 0, 32);
-        p.fill(0, 0, 0, 255);
+        p.stroke(LIGHT_MODE_STROKE_COLOR.r, LIGHT_MODE_STROKE_COLOR.g, LIGHT_MODE_STROKE_COLOR.b, LIGHT_MODE_STROKE_COLOR.a);
+        p.fill(LIGHT_MODE_FILL_COLOR.r, LIGHT_MODE_FILL_COLOR.g, LIGHT_MODE_FILL_COLOR.b, LIGHT_MODE_FILL_COLOR.a);
     }
     
-    for (let layer = 0; layer < 5; layer++) {
-
-        const radius = 256 + layer * 100;
+    for (let layer = 0; layer < LAYER_COUNT; layer++) {
+        const radius = BASE_RADIUS + layer * LAYER_RADIUS_SPACING;
 
         p.beginShape();
-        for (let angle = 0; angle <= p.TWO_PI; angle += 0.01) {
-            const freq1 = 3 + layer * 2;
-            const freq2 = 7 + layer * 3;
-            const freq3 = 12 + layer * 5;
+        for (let angle = 0; angle <= p.TWO_PI; angle += ANGLE_RESOLUTION) {
+            const freq1 = BASE_FREQ1 + layer * FREQ1_INCREMENT;
+            const freq2 = BASE_FREQ2 + layer * FREQ2_INCREMENT;
+            const freq3 = BASE_FREQ3 + layer * FREQ3_INCREMENT;
             
             const waveX = 
-                Math.sin(angle * freq1 + time * 0.5) * (5 + layer * 3) +
-                Math.cos(angle * freq2 + time * 0.30) * (3 + layer * 2) -
-                Math.sin(angle * freq3 + time * 0.4) * (2 + layer * 1);
+                Math.sin(angle * freq1 + time * TIME_SPEED1) * (BASE_AMPLITUDE1 + layer * AMPLITUDE1_INCREMENT) +
+                Math.cos(angle * freq2 + time * TIME_SPEED2) * (BASE_AMPLITUDE2 + layer * AMPLITUDE2_INCREMENT) -
+                Math.sin(angle * freq3 + time * TIME_SPEED3) * (BASE_AMPLITUDE3 + layer * AMPLITUDE3_INCREMENT);
             
             const waveY = 
-                Math.cos(angle * freq1 + time * 0.5) * (5 + layer * 3) -
-                Math.sin(angle * freq2 + time * 0.30) * (3 + layer * 2) +
-                Math.cos(angle * freq3 + time * 0.4) * (2 + layer * 1);
+                Math.cos(angle * freq1 + time * TIME_SPEED1) * (BASE_AMPLITUDE1 + layer * AMPLITUDE1_INCREMENT) -
+                Math.sin(angle * freq2 + time * TIME_SPEED2) * (BASE_AMPLITUDE2 + layer * AMPLITUDE2_INCREMENT) +
+                Math.cos(angle * freq3 + time * TIME_SPEED3) * (BASE_AMPLITUDE3 + layer * AMPLITUDE3_INCREMENT);
             
             const x = centerX + radius * p.cos(angle) + waveX;
             const y = centerY + radius * p.sin(angle) + waveY;
@@ -68,41 +106,34 @@ export function clock(p: p5, container: HTMLDivElement | null) {
         p.endShape(p.CLOSE);
     }
     
-    const hourAngle = p.map(hours + minutes / 60, 0, 12, 0, p.TWO_PI) - p.PI / 2;
-    const minuteAngle = p.map(minutes + seconds / 60, 0, 60, 0, p.TWO_PI) - p.PI / 2;
+    const hourAngle = p.map(hours + minutes / MINUTES_IN_HOUR, 0, HOURS_IN_CLOCK, 0, p.TWO_PI) - p.PI / 2;
+    const minuteAngle = p.map(minutes + seconds / SECONDS_IN_MINUTE, 0, MINUTES_IN_HOUR, 0, p.TWO_PI) - p.PI / 2;
     const totalSeconds = seconds + milliseconds / 1000;
-    const secondAngle = p.map(totalSeconds, 0, 60, 0, p.TWO_PI) - p.PI / 2;
+    const secondAngle = p.map(totalSeconds, 0, SECONDS_IN_MINUTE, 0, p.TWO_PI) - p.PI / 2;
     
-    const hourHandLength = 120;
-    const minuteHandLength = 160;
-    const secondHandLength = 180;
+    const hourEndX = centerX + HOUR_HAND_LENGTH * p.cos(hourAngle);
+    const hourEndY = centerY + HOUR_HAND_LENGTH * p.sin(hourAngle);
     
-    const hourEndX = centerX + hourHandLength * p.cos(hourAngle);
-    const hourEndY = centerY + hourHandLength * p.sin(hourAngle);
-    
-    p.stroke(255, 255, 255, 200);
-    p.strokeWeight(4);
+    p.stroke(HAND_COLOR.r, HAND_COLOR.g, HAND_COLOR.b, HAND_COLOR.a);
+    p.strokeWeight(HOUR_HAND_WEIGHT);
     p.line(centerX, centerY, hourEndX, hourEndY);
     
-    const minuteEndX = centerX + minuteHandLength * p.cos(minuteAngle);
-    const minuteEndY = centerY + minuteHandLength * p.sin(minuteAngle);
+    const minuteEndX = centerX + MINUTE_HAND_LENGTH * p.cos(minuteAngle);
+    const minuteEndY = centerY + MINUTE_HAND_LENGTH * p.sin(minuteAngle);
     
-    p.stroke(255, 255, 255, 200);
-    p.strokeWeight(3);
+    p.stroke(HAND_COLOR.r, HAND_COLOR.g, HAND_COLOR.b, HAND_COLOR.a);
+    p.strokeWeight(MINUTE_HAND_WEIGHT);
     p.line(centerX, centerY, minuteEndX, minuteEndY);
     
-    const secondEndX = centerX + secondHandLength * p.cos(secondAngle);
-    const secondEndY = centerY + secondHandLength * p.sin(secondAngle);
+    const secondEndX = centerX + SECOND_HAND_LENGTH * p.cos(secondAngle);
+    const secondEndY = centerY + SECOND_HAND_LENGTH * p.sin(secondAngle);
     
-    p.stroke(255, 0, 0, 255);
-    p.strokeWeight(2);
+    p.stroke(SECOND_HAND_COLOR.r, SECOND_HAND_COLOR.g, SECOND_HAND_COLOR.b, SECOND_HAND_COLOR.a);
+    p.strokeWeight(SECOND_HAND_WEIGHT);
     p.line(centerX, centerY, secondEndX, secondEndY);
     
     p.noStroke();
-    if (darkMode) {
-        p.fill(255, 255, 255, 255);
-    } else {
-        p.fill(0, 0, 0, 255);
-    }
-    p.circle(centerX, centerY, 8);
+    const centerDotColor = darkMode ? CENTER_DOT_COLOR_DARK : CENTER_DOT_COLOR_LIGHT;
+    p.fill(centerDotColor.r, centerDotColor.g, centerDotColor.b, centerDotColor.a);
+    p.circle(centerX, centerY, CENTER_DOT_SIZE);
 }

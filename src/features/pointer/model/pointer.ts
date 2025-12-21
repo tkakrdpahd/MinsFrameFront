@@ -3,7 +3,7 @@
  */
 export const POINTER_LIFE = 25;
 export const POINTER_LIFE_DECREMENT = 1;
-export const POINTER_RADIUS = 25;
+export const POINTER_RADIUS = 50;
 export const POINTERS_PER_FRAME = 1;
 export const SMOOTHING = 0.5;
 export const FLAME_INTENSITY = 5;

@@ -19,6 +19,7 @@ import {
     POINTER_SPAWN_OFFSET_MAX,
     POINTER_ALPHA,
 } from "../model/pointer";
+import { MOUSE_MOVE_THRESHOLD } from "../model/particle";
 import { START_COLOR, END_COLOR, lerpColor } from "../model";
 
 const pointerParticles: PointerParticle[] = [];
@@ -27,6 +28,9 @@ let displayX = 0;
 let displayY = 0;
 let velocityX = 0;
 let velocityY = 0;
+let lastDisplayX = 0;
+let lastDisplayY = 0;
+let isFirstFrame = true;
 
 export function resetPointerState() {
     pointerParticles.length = 0;
@@ -34,12 +38,40 @@ export function resetPointerState() {
     displayY = 0;
     velocityX = 0;
     velocityY = 0;
+    lastDisplayX = 0;
+    lastDisplayY = 0;
+    isFirstFrame = true;
 }
 
 export function pointer(p: p5, container: HTMLDivElement | null) {
     if (!container) return;
 
     const { x: targetX, y: targetY } = getMousePosition();
+
+    if (targetX === 0 && targetY === 0) {
+        p.noStroke();
+        
+        for (let i = pointerParticles.length - 1; i >= 0; i--) {
+            const particle = pointerParticles[i];
+            
+            particle.life -= POINTER_LIFE_DECREMENT;
+            
+            if (particle.life <= 0) {
+                pointerParticles.splice(i, 1);
+                continue;
+            }
+            
+            const lifeRatio = particle.life / particle.maxLife;
+            const colorRatio = 1 - lifeRatio;
+            const currentColor = lerpColor(START_COLOR, END_COLOR, colorRatio);
+            const alpha = lifeRatio * POINTER_ALPHA;
+            const currentRadius = particle.radius * lifeRatio;
+            
+            p.fill(currentColor.r, currentColor.g, currentColor.b, alpha);
+            p.circle(particle.x, particle.y, currentRadius);
+        }
+        return;
+    }
 
     const deltaX = targetX - displayX;
     const deltaY = targetY - displayY;
@@ -56,15 +88,29 @@ export function pointer(p: p5, container: HTMLDivElement | null) {
     displayX = p.lerp(displayX, targetX + noiseX, SMOOTHING);
     displayY = p.lerp(displayY, targetY + noiseY, SMOOTHING);
 
-    for (let i = 0; i < POINTERS_PER_FRAME; i++) {
-        pointerParticles.push({
-            x: displayX + p.random(POINTER_SPAWN_OFFSET_MIN, POINTER_SPAWN_OFFSET_MAX),
-            y: displayY + p.random(POINTER_SPAWN_OFFSET_MIN, POINTER_SPAWN_OFFSET_MAX),
-            radius: POINTER_RADIUS,
-            life: POINTER_LIFE,
-            maxLife: POINTER_LIFE,
-        });
+    let mouseMoved = false;
+    if (!isFirstFrame) {
+        const deltaX = Math.abs(displayX - lastDisplayX);
+        const deltaY = Math.abs(displayY - lastDisplayY);
+        mouseMoved = deltaX > MOUSE_MOVE_THRESHOLD || deltaY > MOUSE_MOVE_THRESHOLD;
+    } else {
+        isFirstFrame = false;
     }
+
+    if (mouseMoved) {
+        for (let i = 0; i < POINTERS_PER_FRAME; i++) {
+            pointerParticles.push({
+                x: displayX + p.random(POINTER_SPAWN_OFFSET_MIN, POINTER_SPAWN_OFFSET_MAX),
+                y: displayY + p.random(POINTER_SPAWN_OFFSET_MIN, POINTER_SPAWN_OFFSET_MAX),
+                radius: POINTER_RADIUS,
+                life: POINTER_LIFE,
+                maxLife: POINTER_LIFE,
+            });
+        }
+    }
+
+    lastDisplayX = displayX;
+    lastDisplayY = displayY;
 
     p.noStroke();
 
@@ -85,7 +131,12 @@ export function pointer(p: p5, container: HTMLDivElement | null) {
         const currentRadius = particle.radius * lifeRatio;
         
         p.fill(currentColor.r, currentColor.g, currentColor.b, alpha);
-
         p.circle(particle.x, particle.y, currentRadius);
+    }
+
+    if (!mouseMoved) {
+        const currentColor = lerpColor(START_COLOR, END_COLOR, 0);
+        p.fill(currentColor.r, currentColor.g, currentColor.b, POINTER_ALPHA);
+        p.circle(displayX, displayY, POINTER_RADIUS);
     }
 }
