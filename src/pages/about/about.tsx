@@ -6,7 +6,6 @@
  */
 
 import { Link } from "react-router";
-import { useTranslation } from "react-i18next";
 
 import { Header } from "~/widgets/header/header";
 import { Footer } from "~/widgets/footer/footer";
@@ -14,8 +13,6 @@ import { Footer } from "~/widgets/footer/footer";
 import { Pointer } from "~/features/pointer/pointer";
 
 export function AboutPage() {
-  const { t, i18n } = useTranslation("translation");
-  const resolvedLanguage = i18n.resolvedLanguage;
 
     return (
         <div className="flex flex-col min-h-screen relative">
@@ -26,14 +23,14 @@ export function AboutPage() {
             </div>
 
             <main className="flex flex-col flex-1 items-center justify-center pt-16 pb-4 gap-4 relative z-10">
-                <div className="flex flex-col items-center gap-4 min-h-0">
-                    <p>{t("title")}</p>
-                    <p>{t("description")}</p>
-
-                    {resolvedLanguage == "en"
-                      ? <Link to="/?lng=es" className="hover:underline">Español</Link>
-                      : <Link to="/?lng=en" className="hover:underline">English</Link>
-                    }
+                <div className="flex flex-col items-center gap-4">
+                    <span className="text-lg font-bold">Links</span>
+                    <div className="flex flex-col md:flex-row items-center gap-4">
+                        <Link to="https://github.com/tkakrdpahd" target="_blank" className="hover:underline">GitHub</Link>
+                        <Link to="https://mdoo_pri.artstation.com" target="_blank" className="hover:underline">Artstation</Link>
+                        <Link to="https://mdoo12.itch.io" target="_blank" className="hover:underline">itch.io</Link>
+                        <Link to="https://scholar.google.com/citations?user=rfBJT_cAAAAJ&hl=en" target="_blank" className="hover:underline">Google Scholar</Link>
+                    </div>
                 </div>
             </main>
             
