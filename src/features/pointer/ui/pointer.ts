@@ -4,11 +4,13 @@
 
 import type p5 from "p5";
 import { isDarkMode } from "~/shared/mode/mode";
+import { getMousePosition } from "./particle";
 
 export function pointer(p: p5, container: HTMLDivElement | null) {
     if (!container) return;
 
     const darkMode = isDarkMode();
+    const { x, y } = getMousePosition();
 
     p.noStroke();
 
@@ -18,5 +20,5 @@ export function pointer(p: p5, container: HTMLDivElement | null) {
         p.fill(255, 244, 79, 128);
     }
 
-    p.circle(p.mouseX, p.mouseY, 10);
+    p.circle(x, y, 25);
 }

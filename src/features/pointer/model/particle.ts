@@ -7,9 +7,9 @@ export const LIFE_DECREMENT = 1;
 
 export const GRAVITY = 0.1;
 
-export const PARTICLES_PER_FRAME = 50;
-export const PARTICLE_SPAWN_OFFSET_MIN = -1;
-export const PARTICLE_SPAWN_OFFSET_MAX = 1;
+export const PARTICLES_PER_FRAME = 5;
+export const PARTICLE_SPAWN_OFFSET_MIN = -0.5;
+export const PARTICLE_SPAWN_OFFSET_MAX = 0.5;
 export const PARTICLE_RADIUS_MIN = 1;
 export const PARTICLE_RADIUS_MAX = 5;
 

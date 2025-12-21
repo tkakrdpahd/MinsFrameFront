@@ -16,9 +16,29 @@ import {
 
 const particles: Particle[] = [];
 
+let currentMouseX = 0;
+let currentMouseY = 0;
 let lastMouseX = 0;
 let lastMouseY = 0;
 let isFirstFrame = true;
+
+export function setMousePosition(x: number, y: number) {
+    currentMouseX = x;
+    currentMouseY = y;
+}
+
+export function getMousePosition() {
+    return { x: currentMouseX, y: currentMouseY };
+}
+
+export function resetParticleState() {
+    particles.length = 0;
+    currentMouseX = 0;
+    currentMouseY = 0;
+    lastMouseX = 0;
+    lastMouseY = 0;
+    isFirstFrame = true;
+}
 
 export function particle(p: p5, container: HTMLDivElement | null) {
     if (!container) return;
@@ -29,8 +49,8 @@ export function particle(p: p5, container: HTMLDivElement | null) {
 
     let mouseMoved = false;
     if (!isFirstFrame) {
-        const deltaX = Math.abs(p.mouseX - lastMouseX);
-        const deltaY = Math.abs(p.mouseY - lastMouseY);
+        const deltaX = Math.abs(currentMouseX - lastMouseX);
+        const deltaY = Math.abs(currentMouseY - lastMouseY);
         mouseMoved = deltaX > MOUSE_MOVE_THRESHOLD || deltaY > MOUSE_MOVE_THRESHOLD;
     } else {
         isFirstFrame = false;
@@ -41,8 +61,8 @@ export function particle(p: p5, container: HTMLDivElement | null) {
         
         for (let i = 0; i < PARTICLES_PER_FRAME; i++) {
             particles.push({
-                x: p.mouseX + p.random(PARTICLE_SPAWN_OFFSET_MIN, PARTICLE_SPAWN_OFFSET_MAX),
-                y: p.mouseY + p.random(PARTICLE_SPAWN_OFFSET_MIN, PARTICLE_SPAWN_OFFSET_MAX),
+                x: currentMouseX + p.random(PARTICLE_SPAWN_OFFSET_MIN, PARTICLE_SPAWN_OFFSET_MAX),
+                y: currentMouseY + p.random(PARTICLE_SPAWN_OFFSET_MIN, PARTICLE_SPAWN_OFFSET_MAX),
                 radius: p.random(PARTICLE_RADIUS_MIN, PARTICLE_RADIUS_MAX),
                 color: particleColor,
                 life: INITIAL_LIFE,
@@ -52,8 +72,8 @@ export function particle(p: p5, container: HTMLDivElement | null) {
         }
     }
 
-    lastMouseX = p.mouseX;
-    lastMouseY = p.mouseY;
+    lastMouseX = currentMouseX;
+    lastMouseY = currentMouseY;
 
     for (let i = particles.length - 1; i >= 0; i--) {
         const particle = particles[i];
