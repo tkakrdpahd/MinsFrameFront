@@ -38,7 +38,7 @@ export function Footer() {
               version: 1.0.0
             </span>
             <span className="text-xs text-gray-500 dark:text-gray-500 font-mono">
-              last updated: 2025-12-20
+              last updated: 2025-12-21
             </span>
           </div>
         </div>

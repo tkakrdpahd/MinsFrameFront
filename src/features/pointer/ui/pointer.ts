@@ -3,7 +3,6 @@
  */
 
 import type p5 from "p5";
-import { isDarkMode } from "~/shared/mode/mode";
 import { getMousePosition } from "./particle";
 import type { PointerParticle } from "../model/pointer";
 import { 
@@ -19,9 +18,8 @@ import {
     POINTER_SPAWN_OFFSET_MIN,
     POINTER_SPAWN_OFFSET_MAX,
     POINTER_ALPHA,
-    POINTER_DARK_MODE_COLOR,
-    POINTER_LIGHT_MODE_COLOR,
 } from "../model/pointer";
+import { START_COLOR, END_COLOR, lerpColor } from "../model";
 
 const pointerParticles: PointerParticle[] = [];
 
@@ -41,7 +39,6 @@ export function resetPointerState() {
 export function pointer(p: p5, container: HTMLDivElement | null) {
     if (!container) return;
 
-    const darkMode = isDarkMode();
     const { x: targetX, y: targetY } = getMousePosition();
 
     const deltaX = targetX - displayX;
@@ -82,11 +79,12 @@ export function pointer(p: p5, container: HTMLDivElement | null) {
         }
         
         const lifeRatio = particle.life / particle.maxLife;
+        const colorRatio = 1 - lifeRatio;
+        const currentColor = lerpColor(START_COLOR, END_COLOR, colorRatio);
         const alpha = lifeRatio * POINTER_ALPHA;
         const currentRadius = particle.radius * lifeRatio;
         
-        const color = darkMode ? POINTER_DARK_MODE_COLOR : POINTER_LIGHT_MODE_COLOR;
-        p.fill(color.r, color.g, color.b, alpha);
+        p.fill(currentColor.r, currentColor.g, currentColor.b, alpha);
 
         p.circle(particle.x, particle.y, currentRadius);
     }
