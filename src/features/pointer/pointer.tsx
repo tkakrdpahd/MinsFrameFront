@@ -15,19 +15,38 @@ export function Pointer() {
         if (typeof window === 'undefined') return;
         if (!containerRef.current) return;
 
-        // 페이지 이동 시 상태 초기화
         resetParticleState();
 
-        // 네이티브 마우스 이벤트 리스너
-        const handleMouseMove = (e: MouseEvent) => {
+        const updatePosition = (clientX: number, clientY: number) => {
             if (!containerRef.current) return;
             const rect = containerRef.current.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
             setMousePosition(x, y);
         };
 
+        const handleMouseMove = (e: MouseEvent) => {
+            updatePosition(e.clientX, e.clientY);
+        };
+
+        const handleTouchMove = (e: TouchEvent) => {
+            e.preventDefault();
+            if (e.touches.length > 0) {
+                const touch = e.touches[0];
+                updatePosition(touch.clientX, touch.clientY);
+            }
+        };
+
+        const handleTouchStart = (e: TouchEvent) => {
+            if (e.touches.length > 0) {
+                const touch = e.touches[0];
+                updatePosition(touch.clientX, touch.clientY);
+            }
+        };
+
         window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('touchmove', handleTouchMove, { passive: false });
+        window.addEventListener('touchstart', handleTouchStart, { passive: false });
 
         import("p5").then((p5Module) => {
             const p5 = p5Module.default;
@@ -49,6 +68,8 @@ export function Pointer() {
 
             return () => {
                 window.removeEventListener('mousemove', handleMouseMove);
+                window.removeEventListener('touchmove', handleTouchMove);
+                window.removeEventListener('touchstart', handleTouchStart);
                 if (sketchRef.current) {
                     sketchRef.current.remove();
                 }

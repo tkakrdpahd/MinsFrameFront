@@ -18,7 +18,7 @@ export function AboutPage() {
         <div className="flex flex-col min-h-screen relative">
             <Header />
 
-            <div className="fixed inset-0 z-0 pointer-events-none">
+            <div className="fixed inset-0 z-20 pointer-events-none">
                 <Pointer />
             </div>
 

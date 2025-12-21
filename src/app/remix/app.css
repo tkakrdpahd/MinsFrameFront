@@ -7,7 +7,7 @@
 
 * { 
   cursor: none;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 html,

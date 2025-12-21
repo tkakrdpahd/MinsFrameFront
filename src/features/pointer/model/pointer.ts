@@ -1,0 +1,38 @@
+/**
+ * Pointer model
+ */
+export const POINTER_LIFE = 25;
+export const POINTER_LIFE_DECREMENT = 1;
+export const POINTER_RADIUS = 25;
+export const POINTERS_PER_FRAME = 1;
+export const SMOOTHING = 0.25;
+export const FLAME_INTENSITY = 5;
+export const VELOCITY_DAMPING = 0.5;
+
+export const VELOCITY_ACCELERATION = 0.1;
+export const NOISE_VELOCITY_MULTIPLIER = 0.1;
+
+export const POINTER_SPAWN_OFFSET_MIN = -2;
+export const POINTER_SPAWN_OFFSET_MAX = 2;
+
+export const POINTER_ALPHA = 64;
+
+export const POINTER_DARK_MODE_COLOR = {
+    r: 250,
+    g: 250,
+    b: 51,
+};
+
+export const POINTER_LIGHT_MODE_COLOR = {
+    r: 255,
+    g: 244,
+    b: 79,
+};
+
+export interface PointerParticle {
+    x: number;
+    y: number;
+    radius: number;
+    life: number;
+    maxLife: number;
+}
