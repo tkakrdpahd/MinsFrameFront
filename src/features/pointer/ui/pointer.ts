@@ -18,6 +18,8 @@ import {
     POINTER_SPAWN_OFFSET_MIN,
     POINTER_SPAWN_OFFSET_MAX,
     POINTER_ALPHA,
+    MIN_RADIUS_RATIO,
+    RADIUS_PEAK_LIFE,
 } from "../model/pointer";
 import { MOUSE_MOVE_THRESHOLD } from "../model/particle";
 import { START_COLOR, END_COLOR, lerpColor } from "../model";
@@ -65,7 +67,16 @@ export function pointer(p: p5, container: HTMLDivElement | null) {
             const colorRatio = 1 - lifeRatio;
             const currentColor = lerpColor(START_COLOR, END_COLOR, colorRatio);
             const alpha = lifeRatio * POINTER_ALPHA;
-            const currentRadius = particle.radius * lifeRatio;
+            
+            let radiusRatio: number;
+            if (lifeRatio > RADIUS_PEAK_LIFE) {
+                const t = (1 - lifeRatio) / (1 - RADIUS_PEAK_LIFE);
+                radiusRatio = p.lerp(1.0, MIN_RADIUS_RATIO, t);
+            } else {
+                const t = (RADIUS_PEAK_LIFE - lifeRatio) / RADIUS_PEAK_LIFE;
+                radiusRatio = p.lerp(MIN_RADIUS_RATIO, 0, t);
+            }
+            const currentRadius = particle.radius * radiusRatio;
             
             p.fill(currentColor.r, currentColor.g, currentColor.b, alpha);
             p.circle(particle.x, particle.y, currentRadius);
@@ -128,7 +139,16 @@ export function pointer(p: p5, container: HTMLDivElement | null) {
         const colorRatio = 1 - lifeRatio;
         const currentColor = lerpColor(START_COLOR, END_COLOR, colorRatio);
         const alpha = lifeRatio * POINTER_ALPHA;
-        const currentRadius = particle.radius * lifeRatio;
+        
+        let radiusRatio: number;
+        if (lifeRatio > RADIUS_PEAK_LIFE) {
+            const t = (1 - lifeRatio) / (1 - RADIUS_PEAK_LIFE);
+            radiusRatio = p.lerp(1.0, MIN_RADIUS_RATIO, t);
+        } else {
+            const t = (RADIUS_PEAK_LIFE - lifeRatio) / RADIUS_PEAK_LIFE;
+            radiusRatio = p.lerp(MIN_RADIUS_RATIO, 0, t);
+        }
+        const currentRadius = particle.radius * radiusRatio;
         
         p.fill(currentColor.r, currentColor.g, currentColor.b, alpha);
         p.circle(particle.x, particle.y, currentRadius);
