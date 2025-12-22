@@ -42,7 +42,7 @@ export const SECOND_HAND_COLOR = { r: 255, g: 0, b: 0, a: 255 };
 export const CENTER_DOT_COLOR_DARK = { r: 255, g: 255, b: 255, a: 255 };
 export const CENTER_DOT_COLOR_LIGHT = { r: 0, g: 0, b: 0, a: 255 };
 
-export const ANGLE_RESOLUTION = 0.01;
+export const ANGLE_RESOLUTION = 0.02; // Reduced from 0.01 for better performance
 export const CENTER_DOT_SIZE = 8;
 export const HOURS_IN_CLOCK = 12;
 export const MINUTES_IN_HOUR = 60;

@@ -51,6 +51,8 @@ export function setup(p: p5, container: HTMLDivElement | null) {
         p.createCanvas(window.innerWidth, window.innerHeight);
     }
     p.background(0, 0, 0, 0);
+    // Limit frame rate for better performance
+    p.frameRate(30);
 }
 
 export function clock(p: p5, container: HTMLDivElement | null) {

@@ -20,6 +20,7 @@ import {
     POINTER_ALPHA,
     MIN_RADIUS_RATIO,
     RADIUS_PEAK_LIFE,
+    MAX_POINTER_PARTICLES,
 } from "../model/pointer";
 import { MOUSE_MOVE_THRESHOLD } from "../model/particle";
 import { START_COLOR, END_COLOR, lerpColor } from "../model";
@@ -109,6 +110,11 @@ export function pointer(p: p5, container: HTMLDivElement | null) {
     }
 
     if (mouseMoved) {
+        // Limit particle count for performance
+        if (pointerParticles.length >= MAX_POINTER_PARTICLES) {
+            pointerParticles.splice(0, POINTERS_PER_FRAME);
+        }
+        
         for (let i = 0; i < POINTERS_PER_FRAME; i++) {
             pointerParticles.push({
                 x: displayX + p.random(POINTER_SPAWN_OFFSET_MIN, POINTER_SPAWN_OFFSET_MAX),

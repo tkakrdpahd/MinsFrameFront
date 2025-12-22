@@ -20,6 +20,9 @@ export const POINTER_ALPHA = 128;
 export const MIN_RADIUS_RATIO = 0.5;
 export const RADIUS_PEAK_LIFE = 0.5;
 
+// Performance optimization
+export const MAX_POINTER_PARTICLES = 100;
+
 export interface PointerParticle {
     x: number;
     y: number;

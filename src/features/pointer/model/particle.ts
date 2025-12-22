@@ -22,6 +22,9 @@ export const MOUSE_MOVE_THRESHOLD = 0.1;
 
 export const PARTICLE_ALPHA = 128;
 
+// Performance optimization
+export const MAX_PARTICLES = 200;
+
 export interface ParticleColor {
     r: number;
     g: number;

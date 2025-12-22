@@ -11,6 +11,7 @@ import {
     INITIAL_VELOCITY_X_MIN, INITIAL_VELOCITY_X_MAX, INITIAL_VELOCITY_Y_MIN, INITIAL_VELOCITY_Y_MAX, 
     MOUSE_MOVE_THRESHOLD,
     PARTICLE_ALPHA,
+    MAX_PARTICLES,
 } from "../model";
 import { START_COLOR, END_COLOR, lerpColor } from "../model";
 
@@ -55,6 +56,11 @@ export function particle(p: p5, container: HTMLDivElement | null) {
     }
 
     if (mouseMoved) {
+        // Limit particle count for performance
+        if (particles.length >= MAX_PARTICLES) {
+            particles.splice(0, PARTICLES_PER_FRAME);
+        }
+        
         for (let i = 0; i < PARTICLES_PER_FRAME; i++) {
             particles.push({
                 x: currentMouseX + p.random(PARTICLE_SPAWN_OFFSET_MIN, PARTICLE_SPAWN_OFFSET_MAX),
